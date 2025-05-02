@@ -23,14 +23,17 @@ def fill_vac_table(info_for_database):
     cur.execute('DROP TABLE IF EXISTS vacansys_from_HH')
     cur.execute('CREATE TABLE vacansys_from_HH'
                 '('
+                'id serial PRIMARY KEY,'
                 'employee_id int,'
                 'vacansy_url varchar(100),'
                 'vacansy_name varchar(100),'
                 'salary int,'
-                'description text'
-                ');')
+                'description text '
+                ');'
+                'ALTER TABLE vacansys_from_HH ADD CONSTRAINT '
+                'fk_vacansys_from_HH_employee_id FOREIGN KEY(id) REFERENCES vacansys_from_HH(id);')
     while True:
-        if s < len(info_for_database) - 1:
+        if s < len(info_for_database):
             cur.execute('INSERT INTO vacansys_from_HH '
                         '(vacansy_url, vacansy_name, description, salary, employee_id) '
                         'VALUES (%s, %s, %s, %s, %s);'
@@ -67,11 +70,14 @@ def fill_emp_table(info_for_database):
     cur.execute('DROP TABLE IF EXISTS employ_from_HH')
     cur.execute('CREATE TABLE employ_from_HH'
                 '('
+                'id serial PRIMARY KEY,'
                 'employee_id int,'
                 'employee_name varchar(100),'
                 'employee_site varchar(100),'
-                'employee_description text'
-                ');')
+                'employee_description text '
+                ');'
+                'ALTER TABLE employ_from_HH ADD CONSTRAINT '
+                'fk_employ_from_HH_employee_id FOREIGN KEY(id) REFERENCES employ_from_HH(id);')
     while True:
         if s < len(info_for_database):
             cur.execute('INSERT INTO employ_from_HH '
